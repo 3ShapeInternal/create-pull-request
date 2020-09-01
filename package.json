@@ -1,0 +1,47 @@
+{
+  "name": "create-pull-request",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Create pull request",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc && ncc build",
+    "format": "prettier --write '**/*.ts'",
+    "format-check": "prettier --check '**/*.ts'",
+    "lint": "eslint src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MindaugasLaganeckas/create-pull-request.git"
+  },
+  "keywords": [
+    "default_branch"
+  ],
+  "author": "Mindaugas Laganeckas",
+  "bugs": {
+    "url": "https://github.com/MindaugasLaganeckas/create-pull-request/issues"
+  },
+  "homepage": "https://github.com/MindaugasLaganeckas/create-pull-request",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/exec": "^1.0.3",
+    "@actions/github": "^2.1.1",
+    "@octokit/request-error": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.9",
+    "@types/node": "14.0.27",
+    "@typescript-eslint/parser": "3.9.0",
+    "@vercel/ncc": "0.23.0",
+    "eslint": "7.6.0",
+    "eslint-plugin-github": "4.1.1",
+    "eslint-plugin-jest": "23.20.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "26.4.0",
+    "jest-circus": "26.4.0",
+    "js-yaml": "3.14.0",
+    "prettier": "2.0.5",
+    "ts-jest": "26.2.0",
+    "typescript": "3.9.7"
+  }
+}

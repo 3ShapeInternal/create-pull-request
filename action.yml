@@ -1,0 +1,11 @@
+name: 'Create pull request'
+description: 'Create pull request'
+inputs:
+  token:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    default: ${{ github.token }}
+  path:
+    description: 'owner/repository'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
