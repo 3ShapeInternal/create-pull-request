@@ -3,21 +3,24 @@ description: 'Create pull request'
 inputs:
   token:
     description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
-    default: ${{ github.token }}
+    required: true
   owner:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: 'Name of the organization'
+    required: true
   repo:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: 'Name of repository'
+    required: true
   baseBranch:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: 'Name of base branch'
     default: 'master'
   headBranch:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
-    default:
+    description: 'Name of feature branch'
+    required: true
   title:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: 'Title of the PR'
+    required: true
   body:
-    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    description: 'PR body message'
     default: ''
 runs:
   using: 'node12'

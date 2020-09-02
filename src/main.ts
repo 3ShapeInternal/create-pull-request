@@ -38,9 +38,9 @@ async function createPullRequest(inputs: Inputs): Promise<void> {
       body,
     };
     const response = await octokit.pulls.create(params);
-    core.debug(`Inputs: ${inspect(response)}`);
+    core.info(`Inputs: ${inspect(response)}`);
   } else {
-    core.debug(`The PR already exists. Will do nothing.`);
+    core.info(`The PR already exists. Will do nothing.`);
   }
 }
 
@@ -55,7 +55,7 @@ async function run(): Promise<void> {
       title: core.getInput("title"),
       body: core.getInput("body"),
     };
-    core.debug(`Inputs: ${inspect(inputs)}`);
+    core.info(`Inputs: ${inspect(inputs)}`);
 
     await createPullRequest(inputs);
   } catch (error) {

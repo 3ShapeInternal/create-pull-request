@@ -13720,10 +13720,10 @@ function createPullRequest(inputs) {
                 body,
             };
             const response = yield octokit.pulls.create(params);
-            core.debug(`Inputs: ${util_1.inspect(response)}`);
+            core.info(`Inputs: ${util_1.inspect(response)}`);
         }
         else {
-            core.debug(`The PR already exists. Will do nothing.`);
+            core.info(`The PR already exists. Will do nothing.`);
         }
     });
 }
@@ -13739,7 +13739,7 @@ function run() {
                 title: core.getInput("title"),
                 body: core.getInput("body"),
             };
-            core.debug(`Inputs: ${util_1.inspect(inputs)}`);
+            core.info(`Inputs: ${util_1.inspect(inputs)}`);
             yield createPullRequest(inputs);
         }
         catch (error) {
