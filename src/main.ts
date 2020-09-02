@@ -13,7 +13,7 @@ export interface Inputs {
   body: string
 }
 
-async function createOrUpdatePullRequest(inputs: Inputs): Promise<void> {
+async function createPullRequest(inputs: Inputs): Promise<void> {
   const listParams: Octokit.PullsListParams = {
     owner: inputs.owner,
     repo: inputs.repo,
@@ -22,7 +22,7 @@ async function createOrUpdatePullRequest(inputs: Inputs): Promise<void> {
     state: 'open'
   }
 
-  const octokit = github.getOctokit(inputs.token);
+  const octokit = new github.GitHub(inputs.token)
 
   const title = "Install Release Drafter";
   const body = "";
@@ -39,17 +39,7 @@ async function createOrUpdatePullRequest(inputs: Inputs): Promise<void> {
     }
     const response = await octokit.pulls.create(params)
   } else {
-    // update pull request
-    const pullRequest = listPullRequestResponse.data[0]
-    const params: Octokit.PullsUpdateParams = {
-      owner: inputs.owner,
-      repo: inputs.repo,
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      pull_number: pullRequest.number,
-      title,
-      body
-    }
-    const response = await octokit.pulls.update(params)
+    core.debug(`The PR already exists. Will do nothing.`);
   }
 }
 
@@ -57,9 +47,12 @@ async function run(): Promise<void> {
   try {
     const inputs: Inputs = {
       token: core.getInput("token"),
-      path: core.getInput("path"),
-      branch: core.getInput("branch"),
-      defaultBranch: core.getInput("defaultBranch")
+      owner: core.getInput("owner"),
+      repo: core.getInput("repo"),
+      baseBranch: core.getInput("baseBranch"),
+      headBranch: core.getInput("headBranch"),
+      title: core.getInput("title"),
+      body: core.getInput("body")
     };
     core.debug(`Inputs: ${inspect(inputs)}`);
 
