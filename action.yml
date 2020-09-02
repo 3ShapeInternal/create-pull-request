@@ -4,8 +4,21 @@ inputs:
   token:
     description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
     default: ${{ github.token }}
-  path:
-    description: 'owner/repository'
+  owner:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+  repo:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+  baseBranch:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    default: 'master'
+  headBranch:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    default:
+  title:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+  body:
+    description: 'GITHUB_TOKEN or a `repo` scoped Personal Access Token (PAT)'
+    default: ''
 runs:
   using: 'node12'
   main: 'dist/index.js'

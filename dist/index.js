@@ -13703,7 +13703,7 @@ function createPullRequest(inputs) {
             repo: inputs.repo,
             base: inputs.baseBranch,
             head: `${inputs.owner}:${inputs.headBranch}`,
-            state: 'open'
+            state: "open",
         };
         const octokit = new github.GitHub(inputs.token);
         const title = "Install Release Drafter";
@@ -13717,9 +13717,10 @@ function createPullRequest(inputs) {
                 base: inputs.baseBranch,
                 head: `${inputs.owner}:${inputs.headBranch}`,
                 title,
-                body
+                body,
             };
             const response = yield octokit.pulls.create(params);
+            core.debug(`Inputs: ${util_1.inspect(response)}`);
         }
         else {
             core.debug(`The PR already exists. Will do nothing.`);
@@ -13736,7 +13737,7 @@ function run() {
                 baseBranch: core.getInput("baseBranch"),
                 headBranch: core.getInput("headBranch"),
                 title: core.getInput("title"),
-                body: core.getInput("body")
+                body: core.getInput("body"),
             };
             core.debug(`Inputs: ${util_1.inspect(inputs)}`);
             yield createPullRequest(inputs);

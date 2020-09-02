@@ -1,16 +1,16 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
-import {Octokit} from "@octokit/rest";
+import { Octokit } from "@octokit/rest";
 import { inspect } from "util";
 
 export interface Inputs {
-  token: string,
-  owner: string,
-  repo: string,
-  baseBranch: string,
-  headBranch: string,
-  title: string,
-  body: string
+  token: string;
+  owner: string;
+  repo: string;
+  baseBranch: string;
+  headBranch: string;
+  title: string;
+  body: string;
 }
 
 async function createPullRequest(inputs: Inputs): Promise<void> {
@@ -19,14 +19,14 @@ async function createPullRequest(inputs: Inputs): Promise<void> {
     repo: inputs.repo,
     base: inputs.baseBranch,
     head: `${inputs.owner}:${inputs.headBranch}`,
-    state: 'open'
-  }
+    state: "open",
+  };
 
-  const octokit = new github.GitHub(inputs.token)
+  const octokit = new github.GitHub(inputs.token);
 
   const title = "Install Release Drafter";
   const body = "";
-  const listPullRequestResponse = await octokit.pulls.list(listParams)
+  const listPullRequestResponse = await octokit.pulls.list(listParams);
   if (listPullRequestResponse.data.length === 0) {
     // create pull request
     const params: Octokit.PullsCreateParams = {
@@ -35,9 +35,10 @@ async function createPullRequest(inputs: Inputs): Promise<void> {
       base: inputs.baseBranch,
       head: `${inputs.owner}:${inputs.headBranch}`,
       title,
-      body
-    }
-    const response = await octokit.pulls.create(params)
+      body,
+    };
+    const response = await octokit.pulls.create(params);
+    core.debug(`Inputs: ${inspect(response)}`);
   } else {
     core.debug(`The PR already exists. Will do nothing.`);
   }
@@ -52,7 +53,7 @@ async function run(): Promise<void> {
       baseBranch: core.getInput("baseBranch"),
       headBranch: core.getInput("headBranch"),
       title: core.getInput("title"),
-      body: core.getInput("body")
+      body: core.getInput("body"),
     };
     core.debug(`Inputs: ${inspect(inputs)}`);
 
