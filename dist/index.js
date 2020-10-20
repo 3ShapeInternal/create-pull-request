@@ -13706,8 +13706,6 @@ function createPullRequest(inputs) {
             state: "open",
         };
         const octokit = new github.GitHub(inputs.token);
-        const title = "Install Release Drafter";
-        const body = "";
         const listPullRequestResponse = yield octokit.pulls.list(listParams);
         if (listPullRequestResponse.data.length === 0) {
             // create pull request
@@ -13716,8 +13714,8 @@ function createPullRequest(inputs) {
                 repo: inputs.repo,
                 base: inputs.baseBranch,
                 head: `${inputs.owner}:${inputs.headBranch}`,
-                title,
-                body,
+                title: inputs.title,
+                body: inputs.body,
             };
             const response = yield octokit.pulls.create(params);
             core.info(`Inputs: ${util_1.inspect(response)}`);
