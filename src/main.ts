@@ -24,8 +24,6 @@ async function createPullRequest(inputs: Inputs): Promise<void> {
 
   const octokit = new github.GitHub(inputs.token);
 
-  const title = "Install Release Drafter";
-  const body = "";
   const listPullRequestResponse = await octokit.pulls.list(listParams);
   if (listPullRequestResponse.data.length === 0) {
     // create pull request
@@ -34,8 +32,8 @@ async function createPullRequest(inputs: Inputs): Promise<void> {
       repo: inputs.repo,
       base: inputs.baseBranch,
       head: `${inputs.owner}:${inputs.headBranch}`,
-      title,
-      body,
+      title: inputs.title,
+      body: inputs.body,
     };
     const response = await octokit.pulls.create(params);
     core.info(`Inputs: ${inspect(response)}`);
